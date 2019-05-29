@@ -7,33 +7,31 @@
 ![sinian](logo.png "Sinian")
 
 ## Getting Started
-Build From Source
----
+
+###Build From Source
 - git clone https://github.com/alibaba/sionnx.git
 - cd sionnx && mkdir build
 - cd build && cmake ../
 - make 
 
-Generate unit ONNX tests:
----
+###Generate unit ONNX tests:
 - cd sionnx/scripts
 - python generate_tests.py (-profile_level: 0=smoke tests; 1=full tests. Default is 0)
 - Generated tests are under folder sionnx/scripts/tests.
 
-Export Tests as Model File + Data Files:
----
+###Export Tests as Model File + Data Files:
 - Prerequisite: Download ONNX(https://github.com/onnx/onnx) source code.
 - cd sionnx/scripts
 - python export.py #onnx_path#(the absolute root path of onnx source code).
 
-Support A New Op:
----
+###Support A New Op:
 1. Add .td file in include/.
 2. Add .golden file(written in numpy) in include/.
 3. Update llvm/utils/TableGen/OnnxTestsEmitter.cpp if necessary.
 4. Build.
 
 ## Documentation
+
 
 ## License
 ```
