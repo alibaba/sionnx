@@ -4,7 +4,7 @@
 ## Introduction
    SIONNX is an auto-gen tests tool for ONNX compliance. It's part of Sinian heterogeneous computing framework and can generate compliance tests automatically for ONNX runtime with configurable settings. The generated tests can be exported to protobuf format to be compatible with many ONNX runtime frameworks.
 
-![sinian](logo.png "Sinian" | width=400)
+![sinian](logo.png | width=400)
 
 ## Getting Started
 
