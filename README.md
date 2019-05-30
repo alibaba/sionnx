@@ -2,9 +2,13 @@
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 ## Introduction
-   SIONNX is an auto-gen tests tool for ONNX compliance. It's part of Sinian heterogeneous computing framework and can generate compliance tests automatically for ONNX runtime with configurable settings. The generated tests can be exported to protobuf format to be compatible with many ONNX runtime frameworks.
+   Sionnx is a tool to automatically generate tests for ONNX compliance. It's originated from Sinian, Alibaba heterogeneous hardware acceleration and optimization platform, and can generate compliance tests with configurable settings for ONNX runtime. The generated tests can be exported to protobuf format to be compatible with many ONNX runtime frameworks.
 
-![sinian](logo.png "Sinian")
+   Sionnx includes a DSL to describe ONNX instrucitons. It leverages LLVM TableGen toolchain to parse the DSL files and generate tests in Python. The TableGen is customized to handle the DSL syntax.
+
+
+![sinian](logo.png "Sinian") 
+![sionnx](logo-sionnx.png "Sionnx")
 
 ## Getting Started
 
