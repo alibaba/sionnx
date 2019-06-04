@@ -34,8 +34,8 @@
 
 ### Support A New Op:
 
-1. Add .td file in include/.
-2. Add .golden file(written in numpy) in include/.
+1. Add/modify .td file in include/.
+2. Add .algorithm file(written in numpy) in include/.
 3. Update llvm/utils/TableGen/OnnxTestsEmitter.cpp if necessary.
 4. Build.
 
