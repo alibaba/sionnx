@@ -1,0 +1,28 @@
+#*
+#* Copyright (C) 2017-2019 Alibaba Group Holding Limited
+#*
+#* Licensed under the Apache License, Version 2.0 (the "License");
+#* you may not use this file except in compliance with the License.
+#* You may obtain a copy of the License at
+#*
+#*      http://www.apache.org/licenses/LICENSE-2.0
+#*
+#* Unless required by applicable law or agreed to in writing, software
+#* distributed under the License is distributed on an "AS IS" BASIS,
+#* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#* See the License for the specific language governing permissions and
+#* limitations under the License.
+
+def OneHot_compute(indices, depth, value, axis=-1, dtype=np.float32):
+    ''' Compute one hot from indices at a specific axis '''
+    values = np.asarray(indices).astype(np.int64)
+    rank = len(values.shape)
+    depth_range = np.arange(depth)
+    if axis < 0:
+        axis += (rank + 1)
+    ls = values.shape[0:axis]
+    rs = values.shape[axis:rank]
+    targets = np.reshape(depth_range, (1,) * len(ls) + depth_range.shape + (1,) * len(rs))
+    values = np.reshape(values, ls + (1,) + rs)
+    ret = np.asarray(targets == values, dtype=dtype)
+    return ret

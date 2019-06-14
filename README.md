@@ -16,9 +16,9 @@
 ### Build From Source
 
 - git clone https://github.com/alibaba/sionnx.git
-- cd sionnx && mkdir build
+- cd sionnx/llvm && mkdir build
 - cd build && cmake ../
-- make 
+- make llvm-tblgen
 
 ### Generate unit ONNX tests:
 

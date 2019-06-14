@@ -1,0 +1,36 @@
+#*
+#* Copyright (C) 2017-2019 Alibaba Group Holding Limited
+#*
+#* Licensed under the Apache License, Version 2.0 (the "License");
+#* you may not use this file except in compliance with the License.
+#* You may obtain a copy of the License at
+#*
+#*      http://www.apache.org/licenses/LICENSE-2.0
+#*
+#* Unless required by applicable law or agreed to in writing, software
+#* distributed under the License is distributed on an "AS IS" BASIS,
+#* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#* See the License for the specific language governing permissions and
+#* limitations under the License.
+
+def Conv_compute(x_0,x_1,x_2,pads,dilations,strides,kernel_shape,auto_pad,group):
+    n, c, h, w = x_0.shape
+    block_top = np.zeros((n, c, pads[0], w))
+    block_bottom = np.zeros((n, c, pads[2], w))
+    input = np.concatenate([block_top, x_0, block_bottom], axis=2) 
+    n, c, h, w = input.shape
+    block_left = np.zeros((n, c, h, pads[1]))
+    block_right = np.zeros((n, c, h, pads[3]))
+    input = np.concatenate([block_left, input, block_right], axis = 3)
+
+    n, c, h, w = input.shape
+    hw_shape = np.arange(h * w).reshape(h, w).shape
+    view_shape = tuple(np.subtract(hw_shape, kernel_shape) + 1) + tuple(kernel_shape)
+
+    input = input.reshape(hw_shape)
+    x_1 = x_1.reshape(x_1.shape[2], x_1.shape[3])
+    input_stride = input.strides + input.strides
+    sub_matrices = np.lib.stride_tricks.as_strided(input, view_shape, input_stride)
+    sum = np.einsum('kl,ijkl->ij', x_1, sub_matrices)
+    sum = sum.reshape(1, 1, sum.shape[0], sum.shape[1])
+    return sum

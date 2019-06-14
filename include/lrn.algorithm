@@ -1,0 +1,24 @@
+#*
+#* Copyright (C) 2017-2019 Alibaba Group Holding Limited
+#*
+#* Licensed under the Apache License, Version 2.0 (the "License");
+#* you may not use this file except in compliance with the License.
+#* You may obtain a copy of the License at
+#*
+#*      http://www.apache.org/licenses/LICENSE-2.0
+#*
+#* Unless required by applicable law or agreed to in writing, software
+#* distributed under the License is distributed on an "AS IS" BASIS,
+#* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#* See the License for the specific language governing permissions and
+#* limitations under the License.
+
+def LRN_compute(x_0, alpha, beta, bias, size):
+    square_sum = np.zeros(x_0.shape).astype(x_0.dtype)
+    for n, c, h, w in np.ndindex(x_0.shape):
+        square_sum[n, c, h, w] = sum(x_0[n,
+                                         max(0, c - int(np.floor((size - 1) / 2))):min(c, c + int(np.ceil((size - 1) / 2)) + 1),
+                                         h,
+                                         w] ** 2)
+        dividor = (bias + (alpha / size) * square_sum) ** beta
+        return x_0 / dividor
