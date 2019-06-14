@@ -40,7 +40,7 @@
 4. Build.
 
 ## Documentation
-
+Sionnx: Automatic Unit Test Generator for ONNX Conformance: https://arxiv.org/abs/1906.05676
 
 ## License
 ```
